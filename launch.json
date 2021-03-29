@@ -1,0 +1,71 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(lldb) Dart aot",
+            // pkg/vm/tool/precompiler2 hello.dart hello.aot
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/xcodebuild/ReleaseX64/dart_precompiled_runtime",
+            // "${workspaceFolder}/../my_demo/main.dart",
+            // "${workspaceFolder}/../my_demo/main.aot","&&",
+            "args": [
+                "${workspaceFolder}/../my_demo/main.aot"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "sourceFileMap": {
+                "../../": "${workspaceFolder}/"
+            },
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
+        
+        
+        {
+            "name": "Python: build.py",
+            "type": "python",
+            "request": "launch",
+            "program": "./tools/build.py",
+            "args": [
+                "--no-goma", "runtime", 
+                "--export-compile-commands"
+            ],
+            "console": "integratedTerminal",
+        },
+        {
+            // xcodebuild/DebugX64/dart --optimization-counter-threshold=0 --print_classes --print-flow-graph --print-flow-graph-optimized --disassemble-optimized --disassemble --print-flow-graph-filter=main.dart --inlining_callee_size_threshold=1 --inlining_caller_size_threshold=1  ../my_demo/main.dart  > ../my_demo/flow_graph.log 2>&1
+            "name": "(lldb) Dart run",
+            "type": "cppdbg",
+            "request": "launch",
+            // "program": "${workspaceFolder}/xcodebuild/ReleaseX64/dart_precompiled_runtime",
+            "program": "${workspaceFolder}/xcodebuild/DebugX64/dart",
+            // "args": ["${workspaceFolder}/my_demo/main.aot",],
+            // vm options: https://gist.github.com/c21c928c585fb39f2c60
+            "args": [
+                "--print-flow-graph",
+                "--print-flow-graph-optimized",
+                "--disassemble-optimized",
+                "--disassemble",
+                "--print-flow-graph-filter=main.dart",
+                "${workspaceFolder}/../my_demo/main.dart",
+            ],
+            // "args": ["",
+            //     "--disassemble-optimized",
+            //     "--print-flow-graph-filter=myFunc",
+            //     "--no-background-compilation",
+            //     "${workspaceFolder}/my_demo/main.dart"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}/",
+            "environment": [],
+            "sourceFileMap": {
+                "../../": "${workspaceFolder}/"
+            },
+            "externalConsole": false,
+            "MIMode": "lldb"
+        }
+    ]
+}
