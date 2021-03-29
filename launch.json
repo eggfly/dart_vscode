@@ -13,7 +13,8 @@
             // "${workspaceFolder}/../my_demo/main.dart",
             // "${workspaceFolder}/../my_demo/main.aot","&&",
             "args": [
-                "${workspaceFolder}/../my_demo/main.aot"],
+                "${workspaceFolder}/../my_demo/main.aot"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -23,21 +24,20 @@
             "externalConsole": false,
             "MIMode": "lldb"
         },
-        
-        
         {
             "name": "Python: build.py",
             "type": "python",
             "request": "launch",
             "program": "./tools/build.py",
             "args": [
-                "--no-goma", "runtime", 
+                "--no-goma",
+                "runtime",
                 "--export-compile-commands"
             ],
             "console": "integratedTerminal",
         },
         {
-            // xcodebuild/DebugX64/dart --optimization-counter-threshold=0 --print_classes --print-flow-graph --print-flow-graph-optimized --disassemble-optimized --disassemble --print-flow-graph-filter=main.dart --inlining_callee_size_threshold=1 --inlining_caller_size_threshold=1  ../my_demo/main.dart  > ../my_demo/flow_graph.log 2>&1
+            // xcodebuild/DebugX64/dart --no-background-compilation --optimization-counter-threshold=0 --print-flow-graph --print-flow-graph-optimized --disassemble-optimized --disassemble --trace_compiler --trace_optimizing_compiler --trace_compilation_trace --trace_osr --trace_inlining --inlining_callee_size_threshold=1 --inlining_caller_size_threshold=1 --print-flow-graph-filter=main.dart ../my_demo/main.dart > ../my_demo/flow_graph.log 2>&1
             "name": "(lldb) Dart run",
             "type": "cppdbg",
             "request": "launch",
@@ -46,10 +46,23 @@
             // "args": ["${workspaceFolder}/my_demo/main.aot",],
             // vm options: https://gist.github.com/c21c928c585fb39f2c60
             "args": [
+                "--no-background-compilation",
+                "--optimization-counter-threshold=0",
+                // "--print_classes",
                 "--print-flow-graph",
                 "--print-flow-graph-optimized",
                 "--disassemble-optimized",
                 "--disassemble",
+                "--trace_compiler",
+                "--trace_optimizing_compiler",
+                "--trace_compilation_trace",
+                "--trace_osr",
+                "--trace_inlining",
+                // "--trace_range_analysis",
+                // "--trace_ssa_allocator",
+                // "--trace_type_propagation",
+                "--inlining_callee_size_threshold=1",
+                "--inlining_caller_size_threshold=1",
                 "--print-flow-graph-filter=main.dart",
                 "${workspaceFolder}/../my_demo/main.dart",
             ],
